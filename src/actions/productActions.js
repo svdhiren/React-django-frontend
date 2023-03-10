@@ -31,11 +31,11 @@ export const listProductDetails = (id) => async (dispatch) => {
     console.log("In listProductDetails");
     dispatch(ProductDetails_request());
 
-    const { data } = await axios.get(`/api/product/${id}`);
+    const { data } = await axios.get(`/api/products/${id}`);
 
     dispatch(ProductDetails_success(data));
   } catch (error) {
-    console.log("Api request /api/product/:id failed...");
+    console.log("Api request /api/products/:id failed...");
     let msg =
       error.response && error.response.data.message
         ? error.response.data.message

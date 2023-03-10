@@ -20,5 +20,10 @@ export const cartReducer = createReducer(cartInitialState, (builder) => {
       if (idx !== -1) state.cartItems[idx] = item;
       else state.cartItems.push(item);
     })
-    .addCase(cart_remove_item, (state, action) => {});
+    .addCase(cart_remove_item, (state, action) => {
+      const id = action.payload;
+
+      const idx = state.cartItems.findIndex((a) => a.product === id);
+      state.cartItems.splice(idx, 1);
+    });
 });

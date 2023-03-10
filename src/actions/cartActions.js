@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { cart_add_item } from "../reducers/cartReducers";
+import { cart_add_item, cart_remove_item } from "../reducers/cartReducers";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   //getState can be used to get access to entire state
@@ -15,10 +15,16 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       price: data.price,
       image: data.image,
       countInStock: data.countInStock,
-      qty,
+      qty: qty,
     })
   );
 
   //Now that state has been updates, we will also add it to the local storage
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const removeFromCart = (id) => (dispatch, getState) => {
+  dispatch(cart_remove_item(id));
+
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
