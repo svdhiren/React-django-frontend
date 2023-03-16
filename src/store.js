@@ -1,22 +1,33 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  productListReducer,
-  productDetailsReducer,
+    productListReducer,
+    productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
+import { userLoginReducer } from "./reducers/userReducers";
 
 //When the website gets reloaded, we have to fetch the cartItems from the
 //local storage and add it to the initial state since store is initialized again when
 //website gets reloaded.
 
-const cartItemsFromStorage = JSON.parse(localStorage.getItem("cartItems"))
-  ? JSON.parse(localStorage.getItem("cartItems"))
-  : [];
+// prettier-ignore
+const cartItemsFromStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")): [];
+
+// prettier-ignore
+var userInfoFromStorage = null;
+if (localStorage.getItem("userInfo") !== "undefined") {
+    console.log("userInfo is undefined : ", localStorage.getItem("userInfo"));
+    userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo"));
+} else console.log("userInfo is undefined...");
+// const userInfoFromStorage = localStorage.getItem("userInfo") !== undefined? JSON.parse(localStorage.getItem("userInfo")): null;
 
 const initialState = {
-  cart: {
-    cartItems: cartItemsFromStorage,
-  },
+    cart: {
+        cartItems: cartItemsFromStorage,
+    },
+    userLogin: {
+        userInfo: userInfoFromStorage,
+    },
 };
 
 // Redux-thunk gets automatically added as a middleware
@@ -25,13 +36,14 @@ const initialState = {
 // configureStore will automatically create the root reducer by passing this object
 // to the Redux combineReducers utility.
 const store = configureStore({
-  reducer: {
-    productList: productListReducer,
-    productDetails: productDetailsReducer,
-    cart: cartReducer,
-  },
-  preloadedState: initialState,
-  devTools: true,
+    reducer: {
+        productList: productListReducer,
+        productDetails: productDetailsReducer,
+        cart: cartReducer,
+        userLogin: userLoginReducer,
+    },
+    preloadedState: initialState,
+    devTools: true,
 });
 
 export default store;

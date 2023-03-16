@@ -19,8 +19,8 @@ export const listProducts = () => async (dispatch) => {
   } catch (error) {
     console.log("Api request /api/products failed...");
     let msg =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.detail
+        ? error.response.data.detail
         : error.message;
     dispatch(ProductList_fail(msg));
   }
@@ -37,8 +37,8 @@ export const listProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     console.log("Api request /api/products/:id failed...");
     let msg =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.detail
+        ? error.response.data.detail
         : error.message;
     dispatch(ProductDetails_fail(msg));
   }
