@@ -17,15 +17,14 @@ function HomeScreen() {
   //const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // async function fetchProducts() {
-    //   const {data} = await axios.get('/api/products/');
-    //   console.log("Received the data : ");
-    //   console.log(data);
-    //   setProducts(data);
-    // }
-    // fetchProducts();
-    console.log("Hello there!");
-    dispatch(listProducts());
+      // async function fetchProducts() {
+      //   const {data} = await axios.get('/api/products/');
+      //   console.log("Received the data : ");
+      //   console.log(data);
+      //   setProducts(data);
+      // }
+      // fetchProducts();
+      dispatch(listProducts());
   }, [dispatch]);
   return (
     <div>

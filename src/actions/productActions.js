@@ -10,19 +10,18 @@ import {
 
 export const listProducts = () => async (dispatch) => {
   try {
-    console.log("In listProducts");
-    dispatch(ProductList_request());
+      dispatch(ProductList_request());
 
-    const { data } = await axios.get("/api/products/");
+      const { data } = await axios.get("/api/products/");
 
-    dispatch(ProductList_success(data));
+      dispatch(ProductList_success(data));
   } catch (error) {
-    console.log("Api request /api/products failed...");
-    let msg =
-      error.response && error.response.data.detail
-        ? error.response.data.detail
-        : error.message;
-    dispatch(ProductList_fail(msg));
+      console.log("Api request /api/products failed...");
+      let msg =
+          error.response && error.response.data.detail
+              ? error.response.data.detail
+              : error.message;
+      dispatch(ProductList_fail(msg));
   }
 };
 

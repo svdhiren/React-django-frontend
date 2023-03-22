@@ -12,11 +12,14 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 
-import { login } from "../actions/userActions";
+import { register } from "../actions/userActions";
 
-function LoginScreen() {
+function RegisterScreen() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [message, setMessage] = useState(""); //Used when confirmPassword is different.
 
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -28,11 +31,8 @@ function LoginScreen() {
         ? searchParams.get("redirect")
         : "/";
 
-    const userLogin = useSelector((state) => state.userLogin);
-    const { loading, userInfo, error } = userLogin;
-
-    // If the user is already logged in, then the user must not log in again. So, we redirect
-    // to the page indicated by redirect.
+    const userRegister = useSelector((state) => state.userRegister);
+    const { loading, userInfo, error } = userRegister;
 
     useEffect(() => {
         if (userInfo) navigate(redirect);
@@ -40,21 +40,37 @@ function LoginScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        if (password !== confirmPassword) setMessage("Passwords do not match");
+        else dispatch(register(name, email, password));
     };
+
     return (
         <FormContainer>
-            <h1>Sign In</h1>
+            <h1>Register</h1>
+            {message && <Message variant="danger">{message}</Message>}
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
+
             <Form onSubmit={submitHandler}>
-                <Form.Group controlId="email">
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        type="name"
+                        placeholder="Enter name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    ></Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mt-4" controlId="email">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
@@ -62,34 +78,37 @@ function LoginScreen() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
-                        placeholder="Enter Password"
+                        placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
+                    ></Form.Control>
+                </Form.Group>
+
+                <Form.Group className="mt-4" controlId="passwordConfirm">
+                    <Form.Label>Confirm password</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Confirm password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
                     ></Form.Control>
                 </Form.Group>
 
                 <Button className="mt-4" type="submit" variant="primary">
-                    Sign In
+                    Register
                 </Button>
             </Form>
-            {/* my-3 means : A margin of 3px in y axis both top and bottom */}
-            {/* <Row className=" my-3 d-inline-block"> */}
+
             <div className=" my-3 d-inline-block">
-                New customer?{"  "}
-                <Link
-                    to={
-                        redirect
-                            ? `/register?redirect=${redirect}`
-                            : "/register"
-                    }
-                >
-                    Register
+                Already have an account?{"  "}
+                <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+                    Sign In
                 </Link>
             </div>
-
-            {/* </Row> */}
         </FormContainer>
     );
 }
 
-export default LoginScreen;
+export default RegisterScreen;

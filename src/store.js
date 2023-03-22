@@ -4,7 +4,7 @@ import {
     productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userLoginReducer } from "./reducers/userReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 //When the website gets reloaded, we have to fetch the cartItems from the
 //local storage and add it to the initial state since store is initialized again when
@@ -16,7 +16,6 @@ const cartItemsFromStorage = localStorage.getItem("cartItems") ? JSON.parse(loca
 // prettier-ignore
 var userInfoFromStorage = null;
 if (localStorage.getItem("userInfo") !== "undefined") {
-    console.log("userInfo is undefined : ", localStorage.getItem("userInfo"));
     userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo"));
 } else console.log("userInfo is undefined...");
 // const userInfoFromStorage = localStorage.getItem("userInfo") !== undefined? JSON.parse(localStorage.getItem("userInfo")): null;
@@ -41,6 +40,7 @@ const store = configureStore({
         productDetails: productDetailsReducer,
         cart: cartReducer,
         userLogin: userLoginReducer,
+        userRegister: userRegisterReducer,
     },
     preloadedState: initialState,
     devTools: true,
