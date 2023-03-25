@@ -4,7 +4,12 @@ import {
     productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import {
+    userLoginReducer,
+    userRegisterReducer,
+    userDetailsReducer,
+    userUpdateProfileReducer,
+} from "./reducers/userReducers";
 
 //When the website gets reloaded, we have to fetch the cartItems from the
 //local storage and add it to the initial state since store is initialized again when
@@ -41,6 +46,8 @@ const store = configureStore({
         cart: cartReducer,
         userLogin: userLoginReducer,
         userRegister: userRegisterReducer,
+        userDetails: userDetailsReducer,
+        userUpdateProfile: userUpdateProfileReducer,
     },
     preloadedState: initialState,
     devTools: true,
