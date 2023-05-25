@@ -15,3 +15,20 @@ h2 {
 h3 {
     padding: 1rem 0;
 }
+h4 {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a .card-title {
+    font-weight: 450;
+    color: black;
+}
+
+.card-text {
+    font-weight: 300;
+}

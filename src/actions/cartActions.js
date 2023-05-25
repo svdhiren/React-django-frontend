@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { cart_add_item, cart_remove_item } from "../reducers/cartReducers";
+import {
+    cart_add_item,
+    cart_remove_item,
+    cart_save_shipping_addr,
+    cart_save_payment_method,
+} from "../reducers/cartReducers";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   //getState can be used to get access to entire state
@@ -35,4 +40,16 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch(cart_remove_item(id));
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const saveShippingAddress = (data) => (dispatch) => {
+    dispatch(cart_save_shipping_addr(data));
+
+    localStorage.setItem("shippingAddr", JSON.stringify(data));
+};
+
+export const savePaymentMethod = (data) => (dispatch) => {
+    dispatch(cart_save_payment_method(data));
+
+    localStorage.setItem("paymentMethod", JSON.stringify(data));
 };

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-    Link,
-    useParams,
-    useNavigate,
-    useSearchParams,
-} from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -26,7 +21,7 @@ function LoginScreen() {
     //This is a search parameter which indicates whether we have to redirect to a particular page.
     const redirect = searchParams.get("redirect")
         ? searchParams.get("redirect")
-        : "/";
+        : "";
 
     const userLogin = useSelector((state) => state.userLogin);
     const { loading, userInfo, error } = userLogin;
@@ -35,7 +30,7 @@ function LoginScreen() {
     // to the page indicated by redirect.
 
     useEffect(() => {
-        if (userInfo) navigate(redirect);
+        if (userInfo) navigate("/" + redirect);
     }, [navigate, userInfo, redirect]);
 
     const submitHandler = (e) => {

@@ -10,6 +10,7 @@ import {
     userDetailsReducer,
     userUpdateProfileReducer,
 } from "./reducers/userReducers";
+import { orderCreateReducer } from "./reducers/orderReducers";
 
 //When the website gets reloaded, we have to fetch the cartItems from the
 //local storage and add it to the initial state since store is initialized again when
@@ -25,9 +26,19 @@ if (localStorage.getItem("userInfo") !== "undefined") {
 } else console.log("userInfo is undefined...");
 // const userInfoFromStorage = localStorage.getItem("userInfo") !== undefined? JSON.parse(localStorage.getItem("userInfo")): null;
 
+const shippingAddr = localStorage.getItem("shippingAddr")
+    ? JSON.parse(localStorage.getItem("shippingAddr"))
+    : {};
+
+const paymentMethod = localStorage.getItem("paymentMethod")
+    ? localStorage.getItem("paymentMethod")
+    : "";
+
 const initialState = {
     cart: {
         cartItems: cartItemsFromStorage,
+        shippingAddr: shippingAddr,
+        paymentMethod: paymentMethod,
     },
     userLogin: {
         userInfo: userInfoFromStorage,
@@ -48,6 +59,7 @@ const store = configureStore({
         userRegister: userRegisterReducer,
         userDetails: userDetailsReducer,
         userUpdateProfile: userUpdateProfileReducer,
+        orderCreate: orderCreateReducer,
     },
     preloadedState: initialState,
     devTools: true,
