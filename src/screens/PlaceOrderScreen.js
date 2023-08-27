@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Button, ListGroup, Image, Card } from "react-bootstrap";
@@ -32,10 +32,10 @@ function PlaceOrderScreen() {
 
     useEffect(() => {
         if (success) {
-            navigate(`/orders/${order._id}`);
+            navigate(`/order/${order._id}`);
             dispatch(order_create_reset());
         }
-    }, [success, navigate]);
+    }, [success, navigate, dispatch, order]);
 
     const placeOrder = () => {
         dispatch(

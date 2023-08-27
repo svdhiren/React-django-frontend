@@ -10,7 +10,11 @@ import {
     userDetailsReducer,
     userUpdateProfileReducer,
 } from "./reducers/userReducers";
-import { orderCreateReducer } from "./reducers/orderReducers";
+import {
+    orderCreateReducer,
+    orderDetailsReducer,
+    orderPayReducer,
+} from "./reducers/orderReducers";
 
 //When the website gets reloaded, we have to fetch the cartItems from the
 //local storage and add it to the initial state since store is initialized again when
@@ -60,6 +64,8 @@ const store = configureStore({
         userDetails: userDetailsReducer,
         userUpdateProfile: userUpdateProfileReducer,
         orderCreate: orderCreateReducer,
+        orderDetails: orderDetailsReducer,
+        orderPay: orderPayReducer,
     },
     preloadedState: initialState,
     devTools: true,

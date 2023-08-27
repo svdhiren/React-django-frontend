@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-    Link,
-    useParams,
-    useNavigate,
-    useSearchParams,
-} from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import Loader from "../components/Loader";
 import Message from "../components/Message";

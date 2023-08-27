@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import FormContainer from "../components/FormContainer";
 import CheckoutNav from "../components/CheckoutNav";
